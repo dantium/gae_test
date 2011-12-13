@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<div id="header">
+	<div id="user">
+			<ul>
+	        {% if user.is_authenticated %}
+			<li>{{ user.first_name }}</li>
+			{% if user.is_staff %}
+	           <li><a href="{% url admin:index %}" target="blank">Admin</a></li>
+	           {% endif %}
+		        <li><a href="{% url auth-logout %}?next={{request.path}}" title="Logout">Logout</a></li>
+	            {% else %}
+	        <li><a href="{% url auth-login %}?next={{request.path}}" title="Login">Login</a></li>
+
+	            {% endif %}
+	            
+	</div>
+</div>
+	
+<div id="main">
+ 	{% block maincontent %}{% endblock %}
+</div>
+</body>
+</html>
+
+
+

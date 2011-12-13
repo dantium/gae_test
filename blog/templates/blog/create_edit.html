@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %}
+{% load i18n %}
+
+{% block title %}
+{% if object_id %}Edit Post{% else %}Create Post{% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+<form class="cms-form" method="post" action="">{% csrf_token %}
+<fieldset class="fields">
+<legend>{% if object_id %}Edit Post{% else %}Create Post{% endif %}</legend>
+<ul>
+{{ form.as_ul }}
+</ul>
+</fieldset>
+
+<input type="submit" value="Submit"/>
+</form>
+
+{% endblock %}

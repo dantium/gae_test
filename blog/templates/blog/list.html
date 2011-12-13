@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Posts{% endblock title %}
+
+{% block content %}
+<a href="{% url blog-addpost %}" title="Create a new post">Create a new post</a>
+{% if posts %}
+<ul>
+{% for post in posts %}
+	<li><h2><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
+	{% if user.is_staff %}
+	<a href="{% url blog-editpost post.id %}" title="Edit">Edit</a>
+	<a href="{% url blog-deletepost post.id %}" title="Delete">Delete</a>
+	{% endif %}
+	</li>
+{% endfor %}
+</ul>
+{% else %}
+<h2>No Posts Found</h2>
+{% endif %}
+{% endblock %}
+
